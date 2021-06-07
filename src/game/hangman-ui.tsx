@@ -185,7 +185,7 @@ const WordDisplay = (): JSX.Element => {
   );
 };
 
-const GameText = () => {
+const GameText = (): JSX.Element => {
   const { wrongGuesses, maxGuesses, status, userInput } = useGame();
   const intl = useIntl();
 
@@ -211,7 +211,7 @@ const GameText = () => {
   );
 };
 
-const HangmanGallows = () => {
+const HangmanGallows = (): JSX.Element => {
   const { wrongGuesses } = useGame();
   const partsToRender = HangManParts.slice(0, wrongGuesses.length);
   return (
@@ -239,7 +239,7 @@ const HangmanGallows = () => {
   );
 };
 
-const Banner = () => {
+const Banner = (): JSX.Element => {
   return (
     <div className="ui-banner helvetica f3 ttu pa3 bb tracked lh-title">
       <span className="ui-banner__text-primary">Hang</span>

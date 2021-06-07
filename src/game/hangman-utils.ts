@@ -8,7 +8,7 @@ const randomWord = (wordPool: string[]): string => getRandomItemFrom(wordPool);
 
 const LETTERS = /^[A-Za-z]+$/;
 
-const isLetter = (letter: string) =>
+const isLetter = (letter: string): boolean =>
   letter.length === 1 && !!letter.match(LETTERS);
 
 const getStatus = (gameState: GameState): GameStatus => {
@@ -31,7 +31,7 @@ const initialState = {
   hints: [],
 };
 
-const formatDisplay = (currentWord: string, userInput?: string[]) => {
+const formatDisplay = (currentWord: string, userInput?: string[]): string[] => {
   const input = userInput || [];
   return currentWord
     .split('')
