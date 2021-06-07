@@ -8,12 +8,14 @@ const handler = async function (event) {
   // parameters - have to do this manually
   const params =
     queryStringParameters && Object.keys(queryStringParameters).length
-      ? `?${new URLSearchParams(queryStringParameters)}`
-      : '';
+      ? `?${new URLSearchParams(queryStringParameters)}&api_key=${process.env.WORD_API_KEY}`
+      : `?api_key=${process.env.WORD_API_KEY}`;
 
   // build the actual api uri
-  const api = path.replace('/.netlify/functions/quote-api/', '');
-  const uri = `${process.env.QUOTE_API_ENDPOINT}/${api}${params}`;
+  const api = path.replace('/.netlify/functions/api-proxy/', '');
+  const uri = `${process.env.WORD_API_ENDPOINT}/${api}${params}`;
+
+  console.log('URI', uri);
 
   // set the request headers
   // and include the api key
@@ -21,7 +23,6 @@ const handler = async function (event) {
   const appHeaders = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: `Token token="${process.env.QUOTE_API_KEY}"`,
   };
 
   // propagate the user-token
