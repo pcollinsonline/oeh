@@ -19,8 +19,8 @@ const ColorModeToggle = (): JSX.Element => {
         onClick={toggleTheme}
         data-testid="color-mode-toggle"
       >
-        <VisuallyHidden>{btnLabel}</VisuallyHidden>
         {theme === 'light' ? <FaMoon size={12} /> : <FaSun size={12} />}
+        <VisuallyHidden>{btnLabel}</VisuallyHidden>
       </button>
     </Tooltip>
   );

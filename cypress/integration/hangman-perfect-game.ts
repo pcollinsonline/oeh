@@ -13,17 +13,18 @@ describe('win the hangman game', () => {
         .filter((elem, pos, arr) => arr.indexOf(elem) === pos);
 
       lettersToGuess.forEach(letter => {
+        const lcLetter = letter.toLowerCase();
         // find the button for each letter in
         // the word and click it
-        cy.findByRole('button', { name: letter.toLowerCase() }).click();
+        cy.findByRole('button', { name: lcLetter }).click();
 
         // verify that the key is now disabled
         // (no duplicate guesses)
-        cy.findByRole('button', { name: letter }).should('be.disabled');
+        cy.findByRole('button', { name: lcLetter }).should('be.disabled');
 
         // verify that the keyboard key
         // updated as a match
-        cy.findByRole('button', { name: letter })
+        cy.findByRole('button', { name: lcLetter })
           .invoke('attr', 'data-keystatus')
           .then($status => {
             expect($status).eql('letter-match');
