@@ -1,6 +1,7 @@
 {
-  "baseUrl": "http://localhost:8888/",
+  "baseUrl": "localhost:3000",
   "video": false,
   "viewportHeight": 900,
-  "ignoreTestFiles": "**/examples/*"
+  "videosFolder": "build/cypress/videos",
+  "screenshotsFolder": "build/cypress/screenshots"
 }

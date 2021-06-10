@@ -33,7 +33,8 @@
     "lint": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx src --fix",
     "cypress": "cypress open",
     "cypress:run": "cypress run",
-    "netlify:dev": "netlify dev"
+    "netlify:dev": "netlify dev",
+    "test:all": "npm run test -- --watchAll=false && npm run cypress:run"
   },
   "eslintConfig": {
     "extends": "react-app"
