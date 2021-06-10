@@ -200,15 +200,21 @@ button:hover {
 }
 
 .ui-color-mode-toggle {
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2rem;
+  width: 2rem;
   border-radius: 100%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
   border: thin solid var(--color-mode-button-border-color);
   color: var(--color-mode-button-color);
   background-color: var(--color-mode-button-background-color);
+  margin-top: 0.75rem;
+}
+
+.ui-color-mode-toggle > svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .ui-game-text-guesses-remaining,
@@ -295,6 +301,10 @@ button:hover {
 
   .ui-splash-display {
     width: 50vw;
+  }
+
+  .ui-color-mode-toggle {
+    margin-top: .9rem;
   }
 }
 

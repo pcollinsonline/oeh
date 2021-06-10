@@ -27,7 +27,7 @@ const App: React.FC = () => {
 
   return (
     <main>
-      <div className="w-100 absolute flex justify-end top-1 pr3">
+      <div className="w-100 absolute flex justify-end pr3">
         <ColorModeToggle />
       </div>
       {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
