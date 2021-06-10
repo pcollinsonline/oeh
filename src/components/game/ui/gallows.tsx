@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HangmanHead = React.memo(() => {
+const Face = React.memo(() => {
   return (
     <div
       data-testid="head"
@@ -10,14 +10,13 @@ const HangmanHead = React.memo(() => {
         left: '2.5rem',
         height: '3rem',
         width: '3rem',
-        animation: 'fade-in 0.5s 1',
       }}
     />
   );
 });
-HangmanHead.displayName = 'HangmanHead';
+Face.displayName = 'Face';
 
-const HangmanLeftArm = React.memo(() => (
+const LeftArm = React.memo(() => (
   <div
     data-testid="left-arm"
     className="ui-body-part absolute ba"
@@ -31,9 +30,9 @@ const HangmanLeftArm = React.memo(() => (
     }}
   />
 ));
-HangmanLeftArm.displayName = 'HangmanLeftArm';
+LeftArm.displayName = 'LeftArm';
 
-const HangmanRightArm = React.memo(() => (
+const RightArm = React.memo(() => (
   <div
     data-testid="right-arm"
     className="ui-body-part absolute ba"
@@ -47,9 +46,9 @@ const HangmanRightArm = React.memo(() => (
     }}
   />
 ));
-HangmanRightArm.displayName = 'HangmanRightArm';
+RightArm.displayName = 'RightArm';
 
-const HangmanLeftLeg = React.memo(() => (
+const LeftLeg = React.memo(() => (
   <div
     data-testid="left-leg"
     className="ui-body-part absolute ba"
@@ -63,9 +62,9 @@ const HangmanLeftLeg = React.memo(() => (
     }}
   />
 ));
-HangmanLeftLeg.displayName = 'HangmanLeftLeg';
+LeftLeg.displayName = 'LeftLeg';
 
-const HangmanRightLeg = React.memo(() => (
+const RightLeg = React.memo(() => (
   <div
     data-testid="right-leg"
     className="ui-hangman-box__right-leg ui-body-part absolute ba"
@@ -79,9 +78,9 @@ const HangmanRightLeg = React.memo(() => (
     }}
   />
 ));
-HangmanRightLeg.displayName = 'HangmanRightLeg';
+RightLeg.displayName = 'RightLeg';
 
-const HangmanBody = React.memo(() => (
+const Body = React.memo(() => (
   <div
     data-testid="body"
     className="ui-body-part absolute ba"
@@ -94,17 +93,48 @@ const HangmanBody = React.memo(() => (
     }}
   />
 ));
-HangmanBody.displayName = 'HangmanBody';
+Body.displayName = 'Body';
 
-const HangManParts = [
-  <HangmanHead key={HangmanHead.displayName} />,
-  <HangmanBody key={HangmanBody.displayName} />,
-  <HangmanLeftArm key={HangmanLeftArm.displayName} />,
-  <HangmanRightArm key={HangmanRightArm.displayName} />,
-  <HangmanLeftLeg key={HangmanLeftLeg.displayName} />,
-  <HangmanRightLeg key={HangmanRightLeg.displayName} />,
+const BodyParts = [
+  <Face key={Face.displayName} />,
+  <Body key={Body.displayName} />,
+  <LeftArm key={LeftArm.displayName} />,
+  <RightArm key={RightArm.displayName} />,
+  <LeftLeg key={LeftLeg.displayName} />,
+  <RightLeg key={RightLeg.displayName} />,
 ];
 
-const MAX_GUESSES = HangManParts.length;
+const MAX_GUESSES = BodyParts.length;
 
-export { HangManParts, MAX_GUESSES };
+const Gallows = React.memo(
+  ({ guessesRemaining }: { guessesRemaining: number }): JSX.Element => {
+    const partsToRender = BodyParts.slice(0, MAX_GUESSES - guessesRemaining);
+    return (
+      <div
+        className="ui-gallows"
+        style={{
+          height: '16rem',
+          width: '8rem',
+          borderLeft: '4px solid',
+          borderBottom: '6px solid',
+          position: 'relative',
+        }}
+      >
+        <div
+          className="ui-gallows absolute left-0 top-0"
+          style={{
+            width: '4rem',
+            height: '1.5rem',
+            borderTop: '4px solid',
+            borderRight: 'thin solid',
+          }}
+        />
+        {partsToRender}
+      </div>
+    );
+  }
+);
+
+Gallows.displayName = 'Gallows';
+
+export { Gallows, MAX_GUESSES };

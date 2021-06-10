@@ -7,7 +7,7 @@ import {
   RenderResult,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TranslationProvider from './i18n/TranslationProvider';
+import TranslationProvider from './i18n/translation-provider';
 
 const AllProviders: React.FC = ({ children }) => {
   // wrap all components in i18n provider

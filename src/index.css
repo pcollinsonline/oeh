@@ -5,17 +5,115 @@
   100% { opacity: 1; }
 }
 
+:root {
+  --white: #fff;
+
+  --white-smoke: #f3f5f7;
+  --mandy: #ed545d;
+  --casper: #b1bfcf;
+  --mulled-wine: #554658;
+  --elephant: #153241;
+  --calypso: #2e6e8d;
+  --firefly: #112d31;
+  --neptune: #88bdbb;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 html {
   box-sizing: border-box;
 }
-*, *:before, *:after {
-  box-sizing: inherit;
+
+body[data-theme='light'] {
+  background-color: var(--white-smoke);
+  --splash-screen-background-color: var(--white-smoke);
+
+  --button-color: var(--mulled-wine);
+  --button-background-color: var(--white-smoke);
+  --button-border-color: var(--mulled-wine);
+  --button-hover-background-color: var(--mulled-wine);
+  --button-hover-color: var(--white-smoke);
+
+  --incorrect-background-color: var(--mandy);
+  --incorrect-color: var(--white-smoke);
+
+  --correct-background-color: var(--neptune);
+  --correct-color: var(--firefly);
+
+  --color-mode-button-color: var(--mulled-wine);
+  --color-mode-button-background-color: var(--neptune);
+  --color-mode-button-border-color: var(--mulled-wine);
+
+  --ui-banner-color: var(--neptune);
+  --ui-banner-color-secondary: var(--mandy);
+  --ui-banner-border-color: var(--mulled-wine);
+
+  --word-display-color: var(--mulled-wine);
+  --word-display-border-color: var(--mulled-wine);
+
+  --game-text-color: var(--mulled-wine);
+  --game-text-background-color: var(--white-smoke);
+  --game-text-border-color: var(--mulled-wine);
+
+  --game-text-bubble-color: var(--firefly);
+  --game-text-bubble-background-color: var(--neptune);
+  --game-text-bubble-border-color: var(--firefly);
+
+  --gallows-border-color: var(--mulled-wine);
+
+  --ui-warning-color: var(--white);
+  --ui-warning-background-color: var(--mandy);
+
+}
+
+body[data-theme='dark'] {
+  background-color: var(--elephant);
+  --splash-screen-background-color: var(--elephant);
+
+  --button-color: var(--white-smoke);
+  --button-background-color: var(--elephant);
+  --button-border-color: var(--calypso);
+  --button-hover-background-color: var(--calypso);
+  --button-hover-color: var(--white-smoke);
+
+  --incorrect-background-color: var(--mandy);
+  --incorrect-color: var(--white-smoke);
+
+  --correct-background-color: var(--neptune);
+  --correct-color: var(--firefly);
+
+  --color-mode-button-color: var(--casper);
+  --color-mode-button-background-color: var(--elephant);
+  --color-mode-button-border-color: var(--casper);
+
+  --ui-banner-color: var(--neptune);
+  --ui-banner-color-secondary: var(--mandy);
+  --ui-banner-border-color: var(--casper);
+
+  --word-display-color: var(--white-smoke);
+  --word-display-border-color: var(--casper);
+
+  --game-text-color: var(--white-smoke);
+  --game-text-background-color: var(--elephant);
+  --game-text-border-color: var(--casper);
+
+
+  --game-text-bubble-color: var(--elephant);
+  --game-text-bubble-background-color: var(--neptune);
+  --game-text-bubble-border-color: var(--calypso);
+
+  --gallows-border-color: var(--neptune);
+
+  --ui-warning-color: var(--white);
+  --ui-warning-background-color: var(--mandy);
 }
 
 body {
   min-height: 100vh;
   width: 100vw;
-  background-color: #264e58;
+  font-family: Helvetica, sans-serif;
 }
 
 #root {
@@ -28,107 +126,205 @@ body {
   width: 100%;
 }
 
+button:hover {
+  cursor: pointer;
+}
 
 .ui-game-container {
   animation: fade-in 0.5s 1;
 
 }
 
-.ui-letter-btn, .ui-reset-btn {
-  background-color: #6e6659;
-  color: #fff;
-  cursor: pointer;
-  height: 2.25rem;
-  border: none;
-  line-height: 1;
-}
+/* ----[ keyboard styles ] -------------------------------------------------*/
 
-.ui-letter-btn {
-  width: 2rem;
-  margin: 0 .125rem
+.ui-letter-btn, .ui-reset-btn {
+  cursor: pointer;
+  line-height: 1;
+  color: var(--button-color);
+  background-color: var(--button-background-color);
+  border: thin solid var(--button-border-color);
+  height: 2rem;
 }
 
 .ui-reset-btn {
-  height: 2rem;
+  font-variant: small-caps;
+}
+
+.ui-reset-btn>span {
+  display: inline-block;
+  position: relative;
+  top: -.15rem
+}
+
+
+.ui-letter-btn {
+  width: 2rem;
+  margin: 0 .125rem;
+}
+
+.ui-letter-btn:hover, .ui-reset-btn:hover {
+  background-color: var(--button-hover-background-color);
+  color: var(--button-hover-color);
 }
 
 .ui-letter-btn:active, .ui-reset-btn:active {
   transform: scale(1.1);
 }
 
-
 .ui-letter-btn.ui-incorrect-key {
-  background-color: #e75a50;
+  background-color: var(--incorrect-background-color);
+  color: var(--incorrect-color);
 }
 
 .ui-letter-btn.ui-letter-match {
-  xbackground-color: #116466;
-  xcolor: #fff;
-  background-color: #88bdbb;
-  color: #122d31;
+  background-color: var(--correct-background-color);
+  color: var(--correct-color);
 }
 
 .ui-letter-btn:disabled {
   cursor: not-allowed;
 }
 
+/* ---- [ text display styles ] --------------------------------------------*/
+
 .ui-word-display {
-  color: #eff9ec;
+  color: var(--word-display-color);
   padding-inline-start: 0;
+  display: grid;
+  column-gap: .25rem;
 }
 
-.ui-word-display__letter {
+.ui-word-display__letter, .ui-splash-display__letter {
   min-height: 2rem;
-  border-bottom: thin solid #88bdbb;
+  border-bottom: thin solid var(--word-display-border-color);
 }
 
-.ui-unguessed {
-  color: #e75a50;
+.ui-color-mode-toggle {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: thin solid var(--color-mode-button-border-color);
+  color: var(--color-mode-button-color);
+  background-color: var(--color-mode-button-background-color);
+}
+
+.ui-game-text-guesses-remaining,
+.ui-game-text-bubble-text {
+  height: 2rem;
+  width: 2rem;
+  line-height: 1;
+  border-radius: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  animation: fade-in 0.5s 1;
+  border: thin solid var(--game-text-bubble-border-color);
+  color: var(--game-text-bubble-color);
+  background-color: var(--game-text-bubble-background-color);
+}
+
+.ui-game-text-start {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 2rem;
+  line-height: 1;
+  border-radius: 100%;
+  text-transform: uppercase;
+  color: var(--game-text-color);
+  background-color: var(--game-text-background-color);
+  border: thin solid var(--game-text-border-color);
+}
+
+.ui-game-text-guesses-remaining.ui-warning, .ui-game-text-bubble-text.ui-warning {
+  color: var(--ui-warning-color);
+  background-color: var(--ui-warning-background-color);
+}
+
+/* ----[ splash screen styles ]-------------------------------------------- */
+
+.ui-splash-display {
+  height: 100vh;
+  width: 60vw;
+  background-color: var(--splash-screen-background-color);
+}
+
+.ui-splash-display__letter {
+  color: var(--neptune);
+  animation: fade-in 0.5s 1;
+}
+
+.ui-splash-display__letter > span{
+  animation: fade-in 0.2s 1;
+}
+
+.ui-word-display__letter[data-missedletter='true'] {
+  color: var(--mandy);
+}
+
+.ui-splash-display__letter:nth-child(5),
+.ui-splash-display__letter:nth-child(6),
+.ui-splash-display__letter:nth-child(7) {
+  color: var(--mandy);
 }
 
 @media screen and (min-width: 30em) {
   .ui-letter-btn {
     height: 3rem;
     width: 3rem;
-    margin: 0 .25rem
+    margin: 0 .25rem;
   }
 
   .ui-reset-btn {
     height: 3rem;
   }
 
-  .ui-word-display__letter {
+  .ui-word-display__letter,
+  .ui-splash-display__letter,
+  .ui-game-text-guesses-remaining,
+  .ui-game-text-bubble-text,
+  .ui-game-text-start {
     height: 3rem;
     width: 3rem;
     font-size: 1.5rem;
   }
 
+  .ui-splash-display {
+    width: 50vw;
+  }
 }
 
 .ui-body-part {
-  background-color: #e75a50;
+  background-color: var(--mandy);
   animation: fade-in 0.5s 1;
 }
 
 .ui-game-text {
-  color: #eff9ec;
+  color: var(--game-text-color);
 }
 
 .ui-gallows {
-  border-color: #88bdbb !important;
+  border-color: var(--gallows-border-color) !important;
 }
 
 .ui-banner {
-  border-color: #eff9ec;
-  color: #88bdbb;
+  border-color: var(--ui-banner-border-color);
+  color: var(--ui-banner-color);
 }
 
 .ui-banner__text-secondary {
-  color: #e75a50;
-
+  color: var(--ui-banner-color-secondary);
 }
 
-
+.ui-error-message {
+  border-color: var(--mandy);
+  background-color: var(--mandy);
+  color: var(--white);
+}
 
 div, button {
   min-width: 0;

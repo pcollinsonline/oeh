@@ -1,25 +1,26 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fetch = require('node-fetch');
 
-const handler = async function (event) {
-  const { headers, path, httpMethod, queryStringParameters, body } = event;
+const LETTERS = /^[A-Za-z]+$/;
 
-  // node-fetch doesn't have anything
-  // out of the box to handle query-string
-  // parameters - have to do this manually
-  const params =
-    queryStringParameters && Object.keys(queryStringParameters).length
-      ? `?${new URLSearchParams(queryStringParameters)}&api_key=${process.env.WORD_API_KEY}`
-      : `?api_key=${process.env.WORD_API_KEY}`;
+const handler = async event => {
+  const { headers, httpMethod, body } = event;
 
-  // build the actual api uri
-  const api = path.replace('/.netlify/functions/api-proxy/', '');
-  const uri = `${process.env.WORD_API_ENDPOINT}/${api}${params}`;
-
-  console.log('URI', uri);
+  const uri =
+    'https://api.wordnik.com/v4/words.json/randomWords?' +
+    'hasDictionaryDef=true' +
+    '&maxCorpusCount=-1' +
+    '&minDictionaryCount=1' +
+    '&maxDictionaryCount=-1' +
+    '&excludePartOfSpeech=family-name,given-name,idiom,proper-noun,prefix' +
+    '&minLength=5' +
+    '&maxLength=14' +
+    `&limit=100` +
+    `&api_key=${process.env.WORD_API_KEY}`;
 
   // set the request headers
   // and include the api key
-  // from the netlfiy env
+  // from the netlify env
   const appHeaders = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -50,12 +51,17 @@ const handler = async function (event) {
     }
     const data = await response.json();
 
+    const scrubbed = data
+      .map(wordObj => wordObj.word)
+      .filter(word => word.match(LETTERS));
+
     return {
       statusCode: 200,
-      body: JSON.stringify(data),
+      body: JSON.stringify(scrubbed),
     };
   } catch (error) {
     // output to netlify function log
+    // eslint-disable-next-line no-console
     console.log(error);
 
     // todo - could do something better here...

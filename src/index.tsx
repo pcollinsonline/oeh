@@ -1,14 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import TranslationProvider from './i18n/translation-provider';
+import DataProvider from './api/data-provider';
+
+import '@reach/tooltip/styles.css';
 import './index.css';
-import TranslationProvider from './i18n/TranslationProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TranslationProvider>
-      <App />
-    </TranslationProvider>
+    <DataProvider>
+      <TranslationProvider>
+        <App />
+      </TranslationProvider>
+    </DataProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
