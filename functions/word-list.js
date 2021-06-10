@@ -3,6 +3,12 @@ const fetch = require('node-fetch');
 
 const LETTERS = /^[A-Za-z]+$/;
 
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+};
+
 const handler = async event => {
   const { headers, httpMethod, body } = event;
 
@@ -57,6 +63,7 @@ const handler = async event => {
 
     return {
       statusCode: 200,
+      headers: CORS_HEADERS,
       body: JSON.stringify(scrubbed),
     };
   } catch (error) {
@@ -67,6 +74,7 @@ const handler = async event => {
     // todo - could do something better here...
     return {
       statusCode: 500,
+      headers: CORS_HEADERS,
       body: JSON.stringify({ msg: error.message }),
     };
   }

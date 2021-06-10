@@ -54,9 +54,11 @@ const WORD_LIST = shuffle([
   'cerebral',
 ]);
 
+const API_CALL = process.env.REACT_APP_WORD_LIST_API || '/api/word-list';
+
 const fetchWordList = async (): Promise<string[]> => {
   try {
-    const wordListResponse = await fetch('/api/word-list');
+    const wordListResponse = await fetch(API_CALL);
 
     if (!wordListResponse.ok) {
       // throw new Error(`ErrorMessage.Wordlist.${wordListResponse.status}`);
