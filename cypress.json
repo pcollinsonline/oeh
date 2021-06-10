@@ -1,5 +1,5 @@
 {
-  "baseUrl": "localhost:3000",
+  "baseUrl": "http://localhost:3000",
   "video": false,
   "viewportHeight": 900,
   "videosFolder": "build/cypress/videos",
